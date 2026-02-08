@@ -57,11 +57,13 @@ export function ProducerCard({ producer, wines }: Props) {
             title="Open wine page"
             type="button"
           >
-            <p>{wine.title}</p>
-            <span>
-              {wine.grape || "Unknown grape"} • {wine.sub_region || "Unknown sub-region"}
-            </span>
-            <strong>{money(wine.price)}</strong>
+            <div className="bourgogne-wine-row-main">
+              <p>{wine.title}</p>
+              <span>
+                {wine.grape || "Unknown grape"} • {wine.sub_region || "Unknown sub-region"}
+              </span>
+            </div>
+            <strong className="bourgogne-wine-row-price">{money(wine.price)}</strong>
           </button>
         ))}
       </div>

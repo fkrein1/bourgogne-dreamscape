@@ -377,9 +377,9 @@ body {
 .bourgogne-wine-list button {
   all: unset;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
   gap: 0.6rem;
   border-radius: 0.7rem;
   border: 1px solid rgba(207, 249, 191, 0.15);
@@ -403,17 +403,34 @@ body {
   color: #f4fdee;
   font-size: 0.84rem;
   line-height: 1.25;
+  overflow-wrap: anywhere;
 }
 
 .bourgogne-wine-list span {
   color: rgba(208, 230, 198, 0.78);
   font-size: 0.72rem;
+  overflow-wrap: anywhere;
 }
 
 .bourgogne-wine-list strong {
   color: #feffd8;
   font-size: 0.8rem;
   font-weight: 600;
+}
+
+.bourgogne-wine-row-main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.16rem;
+}
+
+.bourgogne-wine-row-price {
+  justify-self: end;
+  text-align: right;
+  white-space: nowrap;
+  line-height: 1.2;
 }
 
 .bourgogne-popup .maplibregl-popup-content {
@@ -935,11 +952,10 @@ body {
   }
 
   .bourgogne-wine-list button {
-    align-items: flex-start;
     gap: 0.22rem;
   }
 
-  .bourgogne-wine-list strong {
-    align-self: flex-end;
+  .bourgogne-wine-row-price {
+    align-self: start;
   }
 }

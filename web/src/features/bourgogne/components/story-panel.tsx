@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Pause, Play, SkipBack, SkipForward } from "lucide-react";
 import type { SceneSubRegion } from "@/features/bourgogne/types";
 import { money } from "@/features/bourgogne/lib/map-utils";
@@ -21,10 +22,19 @@ export function StoryPanel({
   onNext,
   onSelectChapter,
 }: Props) {
+  const activePillRef = useRef<HTMLButtonElement | null>(null);
   const activeChapter = chapters.length > 0 ? chapters[storyIndex % chapters.length] : null;
   const leadGrape = activeChapter
     ? Object.entries(activeChapter.grapes || {}).sort((a, b) => b[1] - a[1])[0]?.[0] ?? ""
     : "";
+
+  useEffect(() => {
+    activePillRef.current?.scrollIntoView({
+      block: "nearest",
+      inline: "nearest",
+      behavior: "smooth",
+    });
+  }, [storyIndex, chapters.length]);
 
   return (
     <section className="bourgogne-story">
@@ -57,6 +67,7 @@ export function StoryPanel({
         {chapters.map((chapter, idx) => (
           <button
             key={chapter.id}
+            ref={storyIndex === idx ? activePillRef : null}
             className={`bourgogne-story-pill ${storyIndex === idx ? "is-active" : ""}`}
             onClick={() => onSelectChapter(idx)}
             type="button"
